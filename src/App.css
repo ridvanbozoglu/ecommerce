@@ -1,0 +1,50 @@
+.navbarIcons {
+    @apply text-[#252B42] w-6 h-6 lg:w-3.5 lg:h-3.5 lg:text-[#23A6F0]; 
+}
+
+.montserrat-h2 {
+    @apply font-[montserrat] font-bold text-[40px] leading-[50px] tracking-[0.2px] text-center
+}
+
+.montserrat-h3 {
+    @apply font-[montserrat] font-[700] text-[24px] leading-[32px] tracking-[0.1px]
+}
+
+.montserrat-h4 {
+    @apply font-[montserrat] font-normal text-[20px] leading-[30px] tracking-[0.2px] text-center
+}
+
+
+.montserrat-h6 {
+    @apply font-[montserrat] font-normal text-[20px] leading-[30px] tracking-[0.2px] text-center
+}
+
+
+
+.carousel-indicators button{
+    gap: 0;
+    margin: 0 !important;
+    opacity: 0.5;
+    width: 63px;
+  }
+  
+
+.carousel-control-next {
+    width: 5%;
+}
+
+.carousel-control-prev {
+    width: 5%;
+}
+
+
+.carousel-inner {
+    height: 100%;
+}
+
+
+.carousel-caption {
+    transform: translateY(50%);
+    bottom: 50%;
+}
+

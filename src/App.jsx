@@ -9,7 +9,7 @@ import "./App.css";
 
 const App = () => {
   return (
-    <main className="flex flex-col bg-yellow-200">
+    <main className="flex flex-col">
       <Router>
         <Switch>
           {routes.map((route) => {
