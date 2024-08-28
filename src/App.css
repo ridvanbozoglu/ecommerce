@@ -14,6 +14,9 @@
     @apply font-[montserrat] font-normal text-[20px] leading-[30px] tracking-[0.2px] text-center
 }
 
+.montserrat-h5 {
+    @apply font-[montserrat] font-bold text-[16px] leading-[24px] tracking-[0.1px] text-center
+}
 
 .montserrat-h6 {
     @apply font-[montserrat] font-normal text-[20px] leading-[30px] tracking-[0.2px] text-center
