@@ -1,42 +1,63 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.navbarIcons {
+    @apply text-[#252B42] w-6 h-6 lg:w-3.5 lg:h-3.5 lg:text-[#23A6F0]; 
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.montserrat-h2 {
+    @apply font-[montserrat] font-bold text-[40px] leading-[50px] tracking-[0.2px] text-center
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.montserrat-h3 {
+    @apply font-[montserrat] font-[700] text-[24px] leading-[32px] tracking-[0.1px]
+}
+
+.montserrat-h4 {
+    @apply font-[montserrat] font-normal text-[20px] leading-[30px] tracking-[0.2px] text-center
+}
+
+.montserrat-h5 {
+    @apply font-[montserrat] font-bold text-[16px] leading-[24px] tracking-[0.1px] text-center
+}
+
+.montserrat-h6 {
+    @apply font-[montserrat] font-normal text-[20px] leading-[30px] tracking-[0.2px] text-center
+}
+
+.btn-text {
+    @apply font-[montserrat] font-bold text-[14px] leading-[22px] tracking-[0.2px] text-center
+}
+
+.transformAbsoluteToMiddle {
+    @apply absolute translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%]
+}
+
+
+
+.carousel-indicators button{
+    gap: 0;
+    margin: 0 !important;
+    opacity: 0.5;
+    width: 63px;
   }
-  to {
-    transform: rotate(360deg);
-  }
+  
+
+.carousel-control-next {
+    width: 5%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.carousel-control-prev {
+    width: 5%;
 }
 
-.card {
-  padding: 2em;
+
+.carousel-inner {
+    height: 100%;
 }
 
-.read-the-docs {
-  color: #888;
+
+.carousel-caption {
+    transform: translateY(50%);
+    bottom: 50%;
 }
+
+
+  

@@ -1,35 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import RootLayout from "./pages/root/RootLayuot";
+import routes from "./routes";
+import authRoutes from "./routes/authRoutes";
+import AuthLayout from "./pages/auth/AuthLayout";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
 
-function App() {
-  const [count, setCount] = useState(0)
+import "./App.css";
+
+const App = () => {
+  const isAuthenticated = useSelector((state) => state.client.isAuthenticated);
+  console.log(isAuthenticated);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <main className="flex flex-col">
+      <Router>
+        <Switch>
+          {routes.map((route) => {
+            const Page = route.element;
+            return (
+              <Route
+                key={route.path}
+                path={route.path}
+                exact={true}
+                render={(props) => {
+                  if (!isAuthenticated) {
+                    return <Redirect to="/login" />;
+                  }
+                  return (
+                    <RootLayout>
+                      <Page {...props} />
+                    </RootLayout>
+                  );
+                }}
+              />
+            );
+          })}
+          {authRoutes.map((route) => {
+            const Page = route.element;
+            return (
+              <Route
+                key={route.path}
+                path={route.path}
+                exact={true}
+                render={(props) => {
+                  if (isAuthenticated) {
+                    return <Redirect to="/" />;
+                  }
+                  return (
+                    <AuthLayout>
+                      <Page {...props} />
+                    </AuthLayout>
+                  );
+                }}
+              />
+            );
+          })}
+        </Switch>
+      </Router>
+      <ToastContainer />
+    </main>
+  );
+};
 
-export default App
+export default App;
