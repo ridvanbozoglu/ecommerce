@@ -12,8 +12,8 @@ const clientsSrc = [
 const Clients = () => {
   return (
     <div className="w-[80%] flex flex-col lg:flex-row justify-between items-center py-[50px] gap-[50px]">
-      {clientsSrc.map((client) => (
-        <Link to={"#"}>
+      {clientsSrc.map((client, index) => (
+        <Link to={"#"} key={index}>
           <img src={client} alt="" />
         </Link>
       ))}

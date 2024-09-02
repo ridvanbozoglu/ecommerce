@@ -43,8 +43,8 @@ const BottomBestSeller = () => {
         <h3 className="montserrat-h3 text-[#252B42]">BESTSELLER PRODUCTS</h3>
         <div className="h-[2px] bg-[#ECECEC] my-3 w-full"></div>
         <div className="flex flex-col lg:flex-row justify-between gap-[30px]">
-          {items.map((item) => (
-            <ItemCard itemData={item} />
+          {items.map((item, index) => (
+            <ItemCard itemData={item} key={index} />
           ))}
         </div>
       </div>

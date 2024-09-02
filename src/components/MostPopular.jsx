@@ -48,7 +48,10 @@ const MostPopular = () => {
         </div>
         <div className="flex flex-col lg:flex-row justify-between ">
           {count.map((el) => (
-            <div className="flex gap-[20px] flex-1 p-[25px] mx-[30px] lg:mx-0">
+            <div
+              key={el.number}
+              className="flex gap-[20px] flex-1 p-[25px] mx-[30px] lg:mx-0"
+            >
               <h2 className="text-[#E74040] montserrat-h2">{el.number}.</h2>
               <div className="flex gap-[5px] flex-col items-start">
                 <h6 className="montserrat-h6">{el.h6}</h6>

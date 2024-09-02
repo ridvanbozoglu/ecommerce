@@ -7,6 +7,8 @@ const Button = ({
   outlined = false,
   iconLeft = false,
   dropdown = false,
+  onClick = () => {},
+  className,
   children,
 }) => {
   let classes = "px-[40px] py-[15px] ";
@@ -17,9 +19,12 @@ const Button = ({
   else classes += "bg-[#23A6F0] text-white ";
 
   return (
-    <button className={`${classes} flex items-center`}>
+    <button
+      className={`${classes} flex items-center ${className}`}
+      onClick={onClick}
+    >
       {iconLeft && icon && <span className="mr-2">Icon</span>}
-      <h3 className="montserrat-h3">{children}</h3>
+      {children}
       {dropdown && <span className="ml-2">▼</span>}
     </button>
   );

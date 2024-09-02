@@ -38,7 +38,9 @@ function MyCarousel() {
           <Carousel.Caption className="flex flex-col items-center gap-[24px]">
             <h2 className="montserrat-h2">{item.title}</h2>
             <p className="montserrat-h4">{item.description}</p>
-            <PrimaryButton>Start now</PrimaryButton>
+            <PrimaryButton>
+              <h3 className="montserrat-h3">Start now</h3>
+            </PrimaryButton>
           </Carousel.Caption>
         </Carousel.Item>
       ))}

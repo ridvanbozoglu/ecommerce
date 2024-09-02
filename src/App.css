@@ -22,6 +22,14 @@
     @apply font-[montserrat] font-normal text-[20px] leading-[30px] tracking-[0.2px] text-center
 }
 
+.btn-text {
+    @apply font-[montserrat] font-bold text-[14px] leading-[22px] tracking-[0.2px] text-center
+}
+
+.transformAbsoluteToMiddle {
+    @apply absolute translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%]
+}
+
 
 
 .carousel-indicators button{
@@ -51,3 +59,5 @@
     bottom: 50%;
 }
 
+
+  

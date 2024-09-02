@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "target": "es6",  // ES6 veya daha yüksek sürüm desteği
+      "module": "esnext",  // ESNext modülleri kullanımı
+      "allowSyntheticDefaultImports": true  // Default importlara izin ver
+    },
+    "exclude": [
+      "node_modules"  // Node modüllerini dahil etme
+    ]
+  }
+  

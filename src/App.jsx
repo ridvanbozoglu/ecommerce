@@ -1,13 +1,23 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import RootLayout from "./pages/root/RootLayuot";
-import HomePage from "./pages/root/autlet/HomePage";
 import routes from "./routes";
-
+import authRoutes from "./routes/authRoutes";
+import AuthLayout from "./pages/auth/authLayout";
+import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
 
 import "./App.css";
 
 const App = () => {
+  const isAuthenticated = useSelector((state) => state.client.isAuthenticated);
+  console.log(isAuthenticated);
+
   return (
     <main className="flex flex-col">
       <Router>
@@ -19,17 +29,41 @@ const App = () => {
                 key={route.path}
                 path={route.path}
                 exact={true}
-                render={(props) => (
-                  <RootLayout>
-                    <Page {...props} />
-                  </RootLayout>
-                )}
+                render={(props) => {
+                  if (!isAuthenticated) {
+                    return <Redirect to="/login" />;
+                  }
+                  return (
+                    <RootLayout>
+                      <Page {...props} />
+                    </RootLayout>
+                  );
+                }}
+              />
+            );
+          })}
+          {authRoutes.map((route) => {
+            const Page = route.element;
+            return (
+              <Route
+                key={route.path}
+                path={route.path}
+                exact={true}
+                render={(props) => {
+                  if (isAuthenticated) {
+                    return <Redirect to="/" />;
+                  }
+                  return (
+                    <AuthLayout>
+                      <Page {...props} />
+                    </AuthLayout>
+                  );
+                }}
               />
             );
           })}
         </Switch>
       </Router>
-
       <ToastContainer />
     </main>
   );

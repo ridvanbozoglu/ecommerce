@@ -1,6 +1,6 @@
-import secondRoute from "./SecondRoute"
+import shopPage from "./ShopPage"
 import homeRoute from "./HomeRoute"
 
-const routes = [homeRoute,secondRoute]
+const routes = [homeRoute,shopPage]
 
 export default routes
