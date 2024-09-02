@@ -7,7 +7,7 @@ import {
 import RootLayout from "./pages/root/RootLayuot";
 import routes from "./routes";
 import authRoutes from "./routes/authRoutes";
-import AuthLayout from "./pages/auth/authLayout";
+import AuthLayout from "./pages/auth/AuthLayout";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
