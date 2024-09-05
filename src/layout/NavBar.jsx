@@ -5,37 +5,9 @@ import { FiSearch, FiMenu } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import NavBarLinks from "../components/NavBarLink";
 import { AiOutlineHeart } from "react-icons/ai";
-import { FaAngleDown } from "react-icons/fa";
+
 import { useSelector } from "react-redux";
 import Gravatar from "react-gravatar";
-
-const links = [
-  {
-    text: "Home",
-    link: "/",
-  },
-  {
-    text: "Shop",
-    link: "/shop",
-    down: FaAngleDown,
-  },
-  {
-    text: "About",
-    link: "/",
-  },
-  {
-    text: "Blog",
-    link: "/",
-  },
-  {
-    text: "Contact",
-    link: "/",
-  },
-  {
-    text: "Pages",
-    link: "/",
-  },
-];
 
 const NavBar = () => {
   const user = useSelector((state) => state.client.user);
@@ -49,11 +21,7 @@ const NavBar = () => {
         >
           Bandage
         </Link>
-        <ul className="lg:flex hidden gap-4">
-          {links.map((el) => (
-            <NavBarLinks key={el.text} link={el} />
-          ))}
-        </ul>
+        <NavBarLinks />
 
         <div className="flex space-x-4">
           {user?.name ? (

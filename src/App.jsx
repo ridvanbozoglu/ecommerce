@@ -16,7 +16,6 @@ import "./App.css";
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.client.isAuthenticated);
-  console.log(isAuthenticated);
 
   return (
     <main className="flex flex-col">
@@ -28,11 +27,8 @@ const App = () => {
               <Route
                 key={route.path}
                 path={route.path}
-                exact={true}
+                exact={route.exact}
                 render={(props) => {
-                  if (!isAuthenticated) {
-                    return <Redirect to="/login" />;
-                  }
                   return (
                     <RootLayout>
                       <Page {...props} />
@@ -48,11 +44,8 @@ const App = () => {
               <Route
                 key={route.path}
                 path={route.path}
-                exact={true}
+                exact={route.exact}
                 render={(props) => {
-                  if (isAuthenticated) {
-                    return <Redirect to="/" />;
-                  }
                   return (
                     <AuthLayout>
                       <Page {...props} />
