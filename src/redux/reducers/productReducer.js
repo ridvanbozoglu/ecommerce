@@ -12,8 +12,6 @@ export const categoriesThunk = createAsyncThunk(
 export const productsThunk = createAsyncThunk(
   'product/productsThunk',
   async ({ categoryId, offset, order, filter }) => {
-    console.log(categoryId, offset, order, filter);
-    
     const params = new URLSearchParams();
     if (categoryId) {
       params.append('category', categoryId);
@@ -34,11 +32,20 @@ export const productsThunk = createAsyncThunk(
   }
 );
 
+export const fetchProductByIdThunk = createAsyncThunk(
+  'product/fetchProductByIdThunk',
+  async (id) => {
+    const response = await api.get(`/products/${id}`); 
+    return response.data; 
+  }
+);
+
 const productSlice = createSlice({
   name: 'product',
   initialState: {
     categories: [],
     productList: [],
+    currentProduct: {},
     total: 0,
     limit: 16,
     offset: 0,
@@ -53,6 +60,9 @@ const productSlice = createSlice({
     },
     setProductList: (state, action) => {
       return { ...state, productList: action.payload };
+    },
+    setCurrentProduct: (state, action) => {
+      return { ...state, currentProduct: action.payload };
     },
     setTotal: (state, action) => {
       return { ...state, total: action.payload };
@@ -87,7 +97,7 @@ const productSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(productsThunk.fulfilled, (state, action) => {
-        state.productList = action.payload.products;
+        state.productList = [...state.productList, ...action.payload.products];
         state.total = action.payload.total;
         state.isLoading = false;
       })
@@ -95,8 +105,20 @@ const productSlice = createSlice({
         state.isLoading = false;
         state.productDataError = action.error;
       })
+      .addCase(fetchProductByIdThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchProductByIdThunk.fulfilled, (state, action) => {
+        state.currentProduct = action.payload.products;
+        state.total = action.payload.total;
+        state.isLoading = false;
+      })
+      .addCase(fetchProductByIdThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.productDataError = action.error;
+      })
   },
 });
 
-export const { setCategories, setProductList, setTotal, setFetchState, setLimit, setOffset, setFilter } = productSlice.actions;
+export const { setCategories, setProductList, setTotal, setFetchState, setLimit, setOffset, setFilter, setCurrentProduct } = productSlice.actions;
 export default productSlice.reducer;

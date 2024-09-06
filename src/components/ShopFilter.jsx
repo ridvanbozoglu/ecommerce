@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useParams, useHistory, useLocation } from "react-router-dom";
+import React from "react";
+import { useParams, useHistory } from "react-router-dom";
 import { IoGrid } from "react-icons/io5";
 import { FaList, FaAngleDown } from "react-icons/fa";
 import PrimaryButton from "./PrimaryButton";
@@ -16,33 +16,19 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
-const ShopFilter = ({ setFilter, setOrder }) => {
+const ShopFilter = () => {
   const total = useSelector((state) => state.product.total);
   const params = useParams();
   const history = useHistory();
-  const location = useLocation(); // URL query parametrelerini almak için
-
-  // URL query parametrelerini çek
-  const searchParams = new URLSearchParams(location.search);
-  const defaultFilter = searchParams.get("filter") || "";
-  const defaultOrder = searchParams.get("order") || "price:asc";
 
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: {
-      filter: defaultFilter,
-      order: defaultOrder,
+      filter: "",
+      order: "price:asc",
     },
   });
 
-  useEffect(() => {
-    // URL'den gelen parametreleri form alanlarına set et
-    setValue("filter", defaultFilter);
-    setValue("order", defaultOrder);
-  }, [defaultFilter, defaultOrder, setValue]);
-
   const onSubmit = (data) => {
-    setFilter(data.filter);
-    setOrder(data.order);
     history.push(
       `/shop/${params.gender}/${params.categoryName}/${params.categoryId}?&filter=${data.filter}&order=${data.order}`
     );
