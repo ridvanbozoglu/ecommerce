@@ -30,7 +30,7 @@ const clientSlice = createSlice({
     language: '',
     userDataLoading: false, 
     userDataError: null,
-    isAuthenticated: false, 
+    isAuthenticated: !!localStorage.getItem("token") || !!sessionStorage.getItem("token"), 
   },
   reducers: {
     setUser: (state, action) => {      

@@ -4,7 +4,7 @@ import NavBar from "../../layout/NavBar";
 
 const RootLayuot = ({ children }) => {
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col min-h-[100vh] justify-between">
       <NavBar />
       <section>{children}</section>
       <Footer />

@@ -1,11 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ShopPageItemCard = ({ item }) => {
+const ShopPageItemCard = ({ item, categoryName, gender }) => {
+  const productSlug = item.name.toLowerCase().split(" ").join("-");
+  const link = `/shop/${gender}/${categoryName}/${item.category_id}/${productSlug}/${item.id}`;
   return (
-    <Link to={"/shop/" + item.id} className="flex flex-col lg:w-[20%]">
+    <Link to={link} className="flex flex-col lg:w-[20%]">
       <div>
-        <img src={item.images[0].url} alt="" className="w-full" />
+        <img
+          src={item.images[0].url}
+          alt=""
+          className="w-full hover:scale-125"
+        />
       </div>
       <div className="flex flex-col gap-[10px] p-[25px] pb-[35px] items-center">
         <h5>{item.name}</h5>

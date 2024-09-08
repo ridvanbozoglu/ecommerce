@@ -26,10 +26,13 @@ const LoginPage = () => {
         dispatch(setUser(response.payload));
         if (data.rememberMe) {
           localStorage.setItem("token", response.payload.token);
-        }
+        } else sessionStorage.setItem("token", response.payload.token);
         toast.success("Login successful!");
-        history.push("/");
-        // history.back() state i kaybettiği için kullanmadım ve çözülmesi gerek....
+        if (history.length > 1) {
+          history.goBack();
+        } else {
+          history.push("/");
+        }
       }
     } catch (error) {
       toast.error("Login failed!");

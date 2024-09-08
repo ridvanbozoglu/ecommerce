@@ -80,7 +80,12 @@ const ShopPageItemContainer = () => {
       <div className="flex flex-col lg:flex-row lg:flex-wrap gap-[30px] justify-between w-[80%]">
         {productList.length > 0 ? (
           productList.map((item, index) => (
-            <ShopPageItemCard key={index} item={item} />
+            <ShopPageItemCard
+              key={index}
+              item={item}
+              categoryName={params.categoryName}
+              gender={params.gender}
+            />
           ))
         ) : total > 0 ? (
           <Spinner />

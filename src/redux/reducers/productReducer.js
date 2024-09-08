@@ -35,8 +35,26 @@ export const productsThunk = createAsyncThunk(
 export const fetchProductByIdThunk = createAsyncThunk(
   'product/fetchProductByIdThunk',
   async (id) => {
-    const response = await api.get(`/products/${id}`); 
-    return response.data; 
+    try {
+      const response = await api.get(`/products/${id}`);
+      console.log(response.data);
+      
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const suggestedProductsThunk = createAsyncThunk(
+  'product/suggestedProductsThunk',
+  async () => {
+    const params = new URLSearchParams();
+    params.append('sort',"rating:desc");
+    params.append('limit', 8);
+    const endPoint = `/products?${params.toString()}`;
+    const response = await api.get(endPoint); 
+    return response.data;
   }
 );
 
@@ -109,8 +127,7 @@ const productSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchProductByIdThunk.fulfilled, (state, action) => {
-        state.currentProduct = action.payload.products;
-        state.total = action.payload.total;
+        state.currentProduct = action.payload;
         state.isLoading = false;
       })
       .addCase(fetchProductByIdThunk.rejected, (state, action) => {

@@ -12,10 +12,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
 
+import CreateOrderPage from "../src/pages/root/autlet/CreateOrderPage";
+
 import "./App.css";
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.client.isAuthenticated);
+  console.log(isAuthenticated);
 
   return (
     <main className="flex flex-col">
@@ -55,6 +58,23 @@ const App = () => {
               />
             );
           })}
+          <Route
+            exact={true}
+            render={(props) =>
+              isAuthenticated ? (
+                <RootLayout>
+                  <CreateOrderPage />
+                </RootLayout>
+              ) : (
+                <Redirect
+                  to={{
+                    pathname: "/login",
+                    state: { from: props.location },
+                  }}
+                />
+              )
+            }
+          />
         </Switch>
       </Router>
       <ToastContainer />
