@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import clientReducer, {
   loginThunk,
+  setIsAuthenticated,
   setUser,
 } from "../../../redux/reducers/clientReducer";
 import { useHistory } from "react-router-dom";
@@ -24,6 +25,7 @@ const LoginPage = () => {
       const response = await dispatch(loginThunk(data));
       if (!response.massage) {
         dispatch(setUser(response.payload));
+        dispatch(setIsAuthenticated(true));
         if (data.rememberMe) {
           localStorage.setItem("token", response.payload.token);
         } else sessionStorage.setItem("token", response.payload.token);

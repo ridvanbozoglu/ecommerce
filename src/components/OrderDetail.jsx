@@ -39,13 +39,14 @@ const OrderDetail = () => {
           <p>{totalPrice + shipping - discount} TL</p>
         </div>
       </div>
-
-      <Link
-        to="/create-order"
-        className="block mt-2 text-center bg-blue-500 text-white py-2 px-4 rounded-lg w-full h-full"
-      >
-        Confirm Cart
-      </Link>
+      <div>
+        <Link
+          to="/create-order"
+          className="block mt-2 text-center bg-blue-500 text-white py-2 px-4 rounded-lg w-full h-full"
+        >
+          Confirm Cart
+        </Link>
+      </div>
     </div>
   );
 };

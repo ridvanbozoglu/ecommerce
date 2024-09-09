@@ -13,11 +13,50 @@ export const loginThunk = createAsyncThunk(
   'client/loginThunk',
   async (userData) => {
     const response = await api.post('/login',userData); 
-    console.log(response.data);
-    
     return response.data; 
   }
 );
+
+export const getAdressThunk = createAsyncThunk(
+  'client/getAdress',
+  async () => {
+    const response = await api.get('/user/address'); 
+    return response.data; 
+  }
+);
+
+export const editAdressThunk = createAsyncThunk(
+  'client/editAdressThunk',
+  async (newAdress) => {
+    const response = await api.put('/user/address',newAdress); 
+    return response.data; 
+  }
+);
+
+export const addAdressThunk = createAsyncThunk(
+  'client/addAdressThunk',
+  async (newAdress) => {
+    try{
+    const response = await api.post('/user/address',newAdress); 
+    console.log(response.data[0]);
+    return response.data[0]; }
+    catch (error){ console.log(error);
+    }
+  }
+);
+
+export const deleteAdressThunk = createAsyncThunk(
+  'client/deleteAdressThunk',
+  async (id) => {
+    const response = await api.delete(`/user/address/${id}`);
+
+    
+    return id;
+  }
+);
+
+
+
 
 const clientSlice = createSlice({
   name: 'client',
@@ -29,6 +68,7 @@ const clientSlice = createSlice({
     theme: '',
     language: '',
     userDataLoading: false, 
+    userAddressLoading: false, 
     userDataError: null,
     isAuthenticated: !!localStorage.getItem("token") || !!sessionStorage.getItem("token"), 
   },
@@ -71,6 +111,57 @@ const clientSlice = createSlice({
       })
       .addCase(loginThunk.rejected, (state, action) => {
         state.userDataLoading = false;
+        state.userDataError = action.error;
+      })
+      .addCase(getAdressThunk.pending, (state) => {
+        state.userAddressLoading = true;
+      })
+      .addCase(getAdressThunk.fulfilled, (state, action) => {
+        state.userAddressLoading = false;
+        state.addressList = action.payload;
+      })
+      .addCase(getAdressThunk.rejected, (state, action) => {
+        state.userAddressLoading = false;
+        state.userDataError = action.error;
+      })
+      .addCase(editAdressThunk.pending, (state) => {
+        state.userAddressLoading = true;
+      })
+      .addCase(editAdressThunk.fulfilled, (state, action) => {
+        state.userAddressLoading = false;
+        state.addressList = state.addressList.map((address) => {
+          if (address.id === action.payload.id) {
+            return action.payload;
+          }
+          return address;
+        });
+      })
+      .addCase(editAdressThunk.rejected, (state, action) => {
+        state.userAddressLoading = false;
+        state.userDataError = action.error;
+      })
+      .addCase(addAdressThunk.pending, (state) => {
+        state.userAddressLoading = true;
+      })
+      .addCase(addAdressThunk.fulfilled, (state, action) => {
+        state.userAddressLoading = false;
+        state.addressList = [...state.addressList, action.payload];
+      })
+      .addCase(addAdressThunk.rejected, (state, action) => {
+        state.userAddressLoading = false;
+        state.userDataError = action.error;
+      })
+      .addCase(deleteAdressThunk.pending, (state) => {
+        state.userAddressLoading = true;
+      })
+      .addCase(deleteAdressThunk.fulfilled, (state, action) => {
+        state.userAddressLoading = false;
+        state.addressList = state.addressList.filter(
+          (address) => address.id !== action.payload
+        );
+      })      
+      .addCase(deleteAdressThunk.rejected, (state, action) => {
+        state.userAddressLoading = false;
         state.userDataError = action.error;
       });
   },
